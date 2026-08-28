@@ -25,10 +25,15 @@
     @keyframes lineIn{to{transform:none}}
     .magnetic{transition:transform .18s cubic-bezier(.16,1,.3,1)}
     .ticker{overflow:hidden;border-block:1px solid var(--border);background:var(--surface)}
-    .ticker-track{display:flex;width:max-content;animation:marquee 25s linear infinite}
+    .ticker-track{display:flex;width:max-content;animation:marquee 25s linear infinite;will-change:transform}
+    .ticker-group{display:flex;flex:none}
     .ticker-item{padding:17px 25px;white-space:nowrap;font:600 11px 'Space Grotesk';letter-spacing:.16em;text-transform:uppercase}
     .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lime);margin-right:7px}
-    @keyframes marquee{to{transform:translateX(-50%)}}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .hero-image{opacity:0;transform:translateY(28px) scale(.97);animation:imageIn 1s cubic-bezier(.16,1,.3,1) .35s forwards;will-change:transform,opacity}
+    .hero-image img{transition:transform .8s cubic-bezier(.16,1,.3,1)}
+    .hero-image:hover img{transform:scale(1.035)}
+    @keyframes imageIn{to{opacity:1;transform:none}}
     .card{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
     .card:hover{transform:translateY(-4px);box-shadow:0 18px 38px -18px #1114;border-color:#aaa}
     .tool{transition:transform .25s ease,border-color .25s ease,background .25s ease}
@@ -38,7 +43,7 @@
     iframe{display:block}
     .video-frame{aspect-ratio:9/16}
     .dark-section{background:#141414;color:#f7f6f2}
-    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.ticker-track{animation:none}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.ticker-track{animation:none}.hero-image{opacity:1;transform:none}.hero-image img{transition:none}}
   </style>
 </head>
 <body>
@@ -80,10 +85,10 @@
             <div><b class="mono text-xl">100%</b><small class="mono block text-[10px] uppercase tracking-wider" style="color:var(--muted)">Social native</small></div>
           </div>
         </div>
-        <div class="reveal hidden lg:col-span-5 lg:block">
-          <div class="overflow-hidden rounded-2xl border p-3" style="background:var(--surface);border-color:var(--border)">
+        <div class="hidden lg:col-span-5 lg:block">
+          <div class="hero-image overflow-hidden rounded-2xl border p-3" style="background:var(--surface);border-color:var(--border)">
             <div class="aspect-[4/5] overflow-hidden rounded-xl bg-neutral-900">
-              <img src="assets/images/381319558_688713506640211_5004881808463185397_n.png" alt="David" class="h-full w-full object-cover" onerror="this.style.display='none'">
+              <img src="assets/images/381319558_688713506640211_5004881808463185397_n.png" alt="David" class="h-full w-full object-cover">
             </div>
           </div>
         </div>
@@ -92,8 +97,20 @@
 
     <div class="ticker">
       <div class="ticker-track">
-        <div class="ticker-item"><span class="dot"></span>Video Editing</div><div class="ticker-item"><span class="dot"></span>UGC</div><div class="ticker-item"><span class="dot"></span>Short Form</div><div class="ticker-item"><span class="dot"></span>Real Estate</div><div class="ticker-item"><span class="dot"></span>AI Creative</div>
-        <div class="ticker-item"><span class="dot"></span>Video Editing</div><div class="ticker-item"><span class="dot"></span>UGC</div><div class="ticker-item"><span class="dot"></span>Short Form</div><div class="ticker-item"><span class="dot"></span>Real Estate</div><div class="ticker-item"><span class="dot"></span>AI Creative</div>
+        <div class="ticker-group" aria-hidden="true">
+          <div class="ticker-item"><span class="dot"></span>Video Editing</div>
+          <div class="ticker-item"><span class="dot"></span>UGC</div>
+          <div class="ticker-item"><span class="dot"></span>Short Form</div>
+          <div class="ticker-item"><span class="dot"></span>Real Estate</div>
+          <div class="ticker-item"><span class="dot"></span>AI Creative</div>
+        </div>
+        <div class="ticker-group">
+          <div class="ticker-item"><span class="dot"></span>Video Editing</div>
+          <div class="ticker-item"><span class="dot"></span>UGC</div>
+          <div class="ticker-item"><span class="dot"></span>Short Form</div>
+          <div class="ticker-item"><span class="dot"></span>Real Estate</div>
+          <div class="ticker-item"><span class="dot"></span>AI Creative</div>
+        </div>
       </div>
     </div>
 
@@ -171,7 +188,7 @@
 
     <section id="about" class="mx-auto max-w-6xl px-5 py-20 sm:px-8">
       <div class="grid items-center gap-12 lg:grid-cols-12">
-        <div class="lg:col-span-5"><div class="rounded-2xl border p-3" style="background:var(--surface);border-color:var(--border)"><div class="aspect-square overflow-hidden rounded-xl bg-neutral-900"><img src="assets/images/381319558_688713506640211_5004881808463185397_n.png" alt="David" class="h-full w-full object-cover" onerror="this.style.display='none'"></div></div></div>
+        <div class="lg:col-span-5"><div class="rounded-2xl border p-3" style="background:var(--surface);border-color:var(--border)"><div class="aspect-square overflow-hidden rounded-xl bg-neutral-900"><img src="assets/images/381319558_688713506640211_5004881808463185397_n.png" alt="David" class="h-full w-full object-cover"></div></div></div>
         <div class="lg:col-span-7"><span class="mono text-[10px] uppercase tracking-widest" style="color:var(--muted)">About</span><h2 class="mt-3 text-3xl font-bold uppercase leading-tight sm:text-5xl">Editing with a reason behind every cut.</h2><p class="mt-6 text-base leading-relaxed" style="color:var(--muted)">I'm David, a video editor focused on UGC and social content. I care about pacing, hooks, visual clarity, and making content people want to keep watching.</p><p class="mt-4 text-base leading-relaxed" style="color:var(--muted)">I work with creator footage, property content, promotional videos, and AI-generated creative, shaping each project around what the viewer needs to understand and feel.</p><div class="mt-8"><span class="mono mb-4 block text-[10px] font-bold uppercase tracking-widest">Tools I use</span><div class="grid grid-cols-2 gap-3 sm:grid-cols-5"><div class="tool rounded-xl border p-4 text-center" style="border-color:var(--border)"><img class="mx-auto h-9 w-9" src="https://cdn.simpleicons.org/adobepremierepro" alt="Premiere Pro"><span class="mono mt-3 block text-[9px] uppercase">Premiere Pro</span></div><div class="tool rounded-xl border p-4 text-center" style="border-color:var(--border)"><img class="mx-auto h-9 w-9" src="https://cdn.simpleicons.org/adobeaftereffects" alt="After Effects"><span class="mono mt-3 block text-[9px] uppercase">After Effects</span></div><div class="tool rounded-xl border p-4 text-center" style="border-color:var(--border)"><img class="mx-auto h-9 w-9" src="https://cdn.simpleicons.org/davinciresolve" alt="DaVinci Resolve"><span class="mono mt-3 block text-[9px] uppercase">DaVinci</span></div><div class="tool rounded-xl border p-4 text-center" style="border-color:var(--border)"><img class="mx-auto h-9 w-9" src="https://cdn.simpleicons.org/capcut" alt="CapCut"><span class="mono mt-3 block text-[9px] uppercase">CapCut</span></div><div class="tool rounded-xl border p-4 text-center" style="border-color:var(--border)"><img class="mx-auto h-9 w-9" src="https://cdn.simpleicons.org/frameio" alt="Frame.io"><span class="mono mt-3 block text-[9px] uppercase">Frame.io</span></div></div></div></div>
       </div>
     </section>
